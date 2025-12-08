@@ -1,0 +1,18 @@
+# Java编译文件
+*.class
+
+# 包文件
+*.jar
+*.war
+*.ear
+
+# IDE文件
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# 编译输出
+out/
+bin/
+target/
