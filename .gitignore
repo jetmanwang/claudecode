@@ -1,0 +1,9 @@
+# Compiled executables
+palindrome
+palindrome_verbose
+
+# C/C++ compiled files
+*.o
+*.out
+*.exe
+a.out
