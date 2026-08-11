@@ -4,111 +4,86 @@ This file provides context and guidelines for working with this repository using
 
 ## Project Overview
 
-[Describe your project here - what it does, its purpose, and main features]
+Ember & Ash is a specialty coffee e-commerce storefront demo. It features six sample
+single-origin/blend coffees with search, category (roast level) filters, a product
+detail view, a cart with quantity controls, and a simulated multi-step checkout
+(shipping → payment → review → confirmation). No real payment processing occurs.
 
 ## Repository Structure
 
 ```
 .
-├── [Directory structure will be added as project grows]
+├── index.html
+├── src/
+│   ├── main.tsx              # React entry point
+│   ├── App.tsx                # Top-level layout, filtering/search state
+│   ├── App.css                 # All component styling
+│   ├── index.css                # Global tokens/reset
+│   ├── types.ts                   # Product & cart types
+│   ├── data/products.ts            # Six sample products
+│   ├── context/CartContext.tsx      # Cart state (localStorage-backed)
+│   └── components/                   # Header, Hero, ProductCard/Grid,
+│                                       ProductDetailModal, CartDrawer,
+│                                       Checkout, CategoryFilters, etc.
+└── public/favicon.svg
 ```
 
 ## Development Setup
 
 ### Prerequisites
-- [List required tools, languages, frameworks]
-- [Include version requirements]
+- Node.js 18+ and npm
 
 ### Installation
 ```bash
-# Add installation commands here
-# Example: npm install, pip install -r requirements.txt, etc.
+npm install
 ```
 
 ### Running the Project
 ```bash
-# Add commands to run the project
-# Example: npm start, python main.py, etc.
+npm run dev       # start Vite dev server
+npm run build      # type-check + production build
+npm run preview      # preview the production build
 ```
 
 ## Development Guidelines
 
 ### Code Style
-- [Describe coding conventions and style preferences]
-- [Mention linters, formatters (e.g., ESLint, Prettier, Black)]
+- TypeScript + React function components, no class components.
+- Styling is plain CSS in `src/App.css` (design tokens in `src/index.css`), no CSS-in-JS.
+- Product illustrations are inline SVG (`ProductArt.tsx`) — no external image assets.
 
 ### Testing
-```bash
-# Commands to run tests
-# Example: npm test, pytest, cargo test, etc.
-```
+No automated test suite yet. Verify UI changes by running `npm run dev` and checking
+both desktop and mobile viewport widths.
 
 ### Building
 ```bash
-# Build commands if applicable
-# Example: npm run build, make, cargo build, etc.
+npm run build
+```
+
+### Linting
+```bash
+npm run lint   # oxlint
 ```
 
 ## Architecture
 
 ### Key Components
-- [Describe main components, modules, or services]
+- `CartContext` — cart line items, quantity updates, subtotal, persisted to `localStorage`.
+- `App.tsx` — owns search query, active category filter, selected product (for modal),
+  and checkout-open state.
+- `Checkout.tsx` — self-contained multi-step simulated checkout flow.
 
 ### Design Patterns
-- [Note any important architectural decisions or patterns used]
-
-## Common Tasks
-
-### Adding a New Feature
-1. [Step-by-step instructions]
-
-### Fixing a Bug
-1. [Debugging approach]
-2. [Testing requirements]
-
-### Running Linters/Formatters
-```bash
-# Add relevant commands
-```
-
-## Dependencies
-
-### Main Dependencies
-- [List key dependencies and their purposes]
-
-### Development Dependencies
-- [List dev dependencies]
-
-## Deployment
-
-[Add deployment instructions if applicable]
-
-## Troubleshooting
-
-### Common Issues
-- **Issue**: [Description]
-  - **Solution**: [How to fix]
-
-## Additional Resources
-
-- [Link to documentation]
-- [Link to issue tracker]
-- [Link to design docs]
+- Single global stylesheet (`App.css`) rather than CSS modules, for simplicity at this scale.
+- Product "photos" are generated SVGs colored per-product rather than image assets.
 
 ## Notes for Claude Code
 
 ### Important Conventions
-- [Any specific patterns Claude should follow]
-- [File naming conventions]
-- [Commit message format]
-
-### Testing Requirements
-- [What must be tested]
-- [When to run tests]
-
-### Do Not Modify
-- [List any files or directories that should not be changed]
+- Keep the checkout simulated — do not wire up real payment processing.
+- Prefer editing `App.css` for styling changes over introducing a new styling approach.
 
 ---
 
-*Last updated: 2025-12-08*
+*Last updated: 2026-08-11*
